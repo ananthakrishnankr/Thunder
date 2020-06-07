@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="weather"
+            type="com.akr.thunder.network.CurrentWeather" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        tools:background="@drawable/background">
+
+        <TextView
+            android:id="@+id/timeLabel"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            tools:text="12 PM"
+            shortTime="@{weather}"
+            android:textColor="#fff"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/iconImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            weatherIconDrawable="@{weather}"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/timeLabel"
+            android:layout_toRightOf="@+id/timeLabel"
+            tools:srcCompat="@drawable/partly_cloudy" />
+
+        <TextView
+            android:id="@+id/tempertaureLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            temperature="@{weather}"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            tools:text="72 °F" />
+
+        <TextView
+            android:id="@+id/summaryLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/tempertaureLabel"
+            android:layout_toLeftOf="@id/tempertaureLabel"
+            android:layout_toEndOf="@id/iconImageView"
+            android:layout_toRightOf="@id/iconImageView"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            summary="@{weather}"
+            android:textColor="#fff"
+            tools:text="Partly cloudly" />
+    </RelativeLayout>
+</layout>

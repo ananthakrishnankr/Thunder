@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.akr.thunder.weather.Degree" />
+
+        <variable
+            name="viewModel"
+            type="com.akr.thunder.weather.WeatherViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:background="@drawable/background"
+        tools:context=".weather.WeatherFragment">
+
+        <TextView
+            android:id="@+id/locationLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="60dp"
+            android:text="Bengaluru, Karnataka"
+            android:textColor="@color/textColor"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/timeLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/iconImageView"
+            weatherIconDrawable="@{viewModel.weather.currentWeather}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/locationLabel"
+            tools:srcCompat="@drawable/cloudy_night" />
+
+        <TextView
+            android:id="@+id/tempertaureLabel"
+            degree="@{viewModel.degree}"
+            temperature="@{viewModel.weather.currentWeather}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="150sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/placeHolderDashs" />
+
+        <TextView
+            android:id="@+id/timeLabel"
+            formatTime="@{viewModel.weather}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/tempertaureLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/placeHolderDots" />
+
+        <ImageView
+            android:id="@+id/degreeImgeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:onClick="@{() -> viewModel.changeDegree()}"
+            app:layout_constraintStart_toEndOf="@+id/tempertaureLabel"
+            app:layout_constraintTop_toBottomOf="@+id/timeLabel"
+            degreeIconDrawable="@{viewModel.degree}" />
+
+        <TextView
+            android:id="@+id/humidityLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:text="@string/humidity"
+            android:textColor="@color/subTextColor"
+            app:layout_constraintEnd_toStartOf="@+id/pricipLabel"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tempertaureLabel" />
+
+        <TextView
+            android:id="@+id/pricipLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center_horizontal"
+            android:text="@string/rain_snow"
+            android:textColor="@color/subTextColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/humidityLabel"
+            app:layout_constraintTop_toBottomOf="@+id/tempertaureLabel" />
+
+        <TextView
+            android:id="@+id/humididtyValue"
+            dataInPercentage="@{viewModel.weather.currentWeather.humidity}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/textColor"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/pricipValue"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/humidityLabel"
+            tools:text="@string/placeHolderDashs" />
+
+        <TextView
+            android:id="@+id/pricipValue"
+            dataInPercentage="@{viewModel.weather.currentWeather.precipChance}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/textColor"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/humididtyValue"
+            app:layout_constraintTop_toBottomOf="@+id/pricipLabel"
+            tools:text="@string/placeHolderDashs" />
+
+        <TextView
+            android:id="@+id/summaryLabel"
+            summary="@{viewModel.weather.currentWeather}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/textColor"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/humididtyValue"
+            tools:text="@string/getting_current_weather" />
+
+        <ImageView
+            android:id="@+id/refreshImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="@{() -> viewModel.refresh()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/refresh" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:indeterminateTint="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/refreshImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/refreshImageView" />
+
+        <Button
+            android:id="@+id/hourlyButton"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:background="#40ffffff"
+            android:text="HOURLY"
+            android:onClick="@{() -> viewModel.displayHourlyWeather()}"
+            android:textColor="#ffffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
